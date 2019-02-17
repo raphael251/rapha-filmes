@@ -12,6 +12,7 @@ router.get('/', (req, res) => res.json({ message: "Sucesso!"}));
 app.use('/', router);
 
 router.get('/filmes/:id?', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     let filter = '';
     if (req.params.id) filter = ' where id=' + parseInt(req.params.id);
     executarQueryNoBanco('select * from filmes' + filter, res);

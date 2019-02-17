@@ -1,8 +1,8 @@
 var request = new XMLHttpRequest();
 
-request.open('GET', 'localhost:3000/filmes', true);
+request.open('GET', 'http://localhost:3000/filmes', true);
 
-request.onload = () => {
+request.onload = function () {
     var data = JSON.parse(this.response);
 
     data.forEach(filme => {
