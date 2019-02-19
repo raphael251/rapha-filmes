@@ -8,39 +8,48 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const router = express.Router();
-router.get('/', (req, res) => res.json({ message: "Sucesso!"}));
-app.use('/', router);
 
-router.get('/filmes/:id?', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    let filter = '';
-    if (req.params.id) filter = ' where id=' + parseInt(req.params.id);
-    executarQueryNoBanco('select * from filmes' + filter, res);
-});
+//POST requests (Create):
 
-router.delete('/filmes/:id?', (req, res) => {
-    executarQueryNoBanco('delete from filmes where id=' + parseInt(req.params.id), res);
-});
-
-router.post('/filmes', (req, res) => {
+router.post('/movies', (req, res) => {
     const nome = req.body.nome.substring(0, 200);
     const descricao = req.body.descricao.substring(0, 400);
     const urlCapa = req.body.urlcapa.substring(0, 250);
 
-    executarQueryNoBanco(`insert into filmes(nome, descricao, url_capa) values('${nome}', '${descricao}', '${urlCapa}')`, res);
+    executeDBQuery(`insert into movies(nome, descricao, url_capa) values('${nome}', '${descricao}', '${urlCapa}')`, res);
 });
 
-router.patch('/filmes/:id?', (req, res) => {
+//GET requests (Read):
+
+router.get('/movies/:id?', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    let filter = '';
+    if (req.params.id) filter = ' where id=' + parseInt(req.params.id);
+    executeDBQuery('select * from movies' + filter, res);
+});
+
+//PATCH requests (Update):
+
+router.patch('/movies/:id?', (req, res) => {
     const id = parseInt(req.params.id);
     const descricao = req.body.descricao.substring(0, 400);
 
-    executarQueryNoBanco(`update filmes set descricao='${descricao}' where id=${id}`, res);
+    executeDBQuery(`update movies set descricao='${descricao}' where id=${id}`, res);
 });
 
-app.listen(port);
-console.log("API Funcionando!");
+//DELETE requests (Delete):
 
-function executarQueryNoBanco(query, res) {
+router.delete('/movies/:id?', (req, res) => {
+    executeDBQuery('delete from movies where id=' + parseInt(req.params.id), res);
+});
+
+
+app.listen(port);
+console.log("API Working!");
+
+
+
+function executeDBQuery(query, res) {
     const connection = mysql.createConnection({
         host: 'sql10.freemysqlhosting.net',
         port: 3306,
@@ -56,6 +65,6 @@ function executarQueryNoBanco(query, res) {
             res.json(results);
 
         connection.end();
-        console.log('executou!');
+        console.log('Query executed!');
     });
 }

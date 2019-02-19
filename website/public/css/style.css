@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 10px;
+}
+
+article {
+    border: 1px solid rgba(170, 166, 166, 0.726);
+    border-radius: 8px;
+    box-shadow: .2rem .2rem 20px .05rem rgba(0, 0, 0, 0.2);
+    height: 200px;
+    margin: 20px auto;
+    overflow: hidden;
+    width: 85%;
+}
+
+article img {
+    display: inline-block;
+    height: 100%;
+    object-fit: cover;
+    width: 20%;
+}
+
+.textMovieContainer {
+    display: inline-block;
+    height: 100%;
+    padding: 20px;
+    width: 80%;
+}
+
+/*article h1 {
+    
+}
+
+article p {
+
+}*/
