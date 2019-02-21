@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const port = 3000;
+var port = normalizePort(process.env.PORT || '3000');;
 const mysql = require('mysql');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -9,20 +9,29 @@ app.use(bodyParser.json());
 
 const router = express.Router();
 
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', '*');
+    res.append('Access-Control-Allow-Methods', 'GET,PATCH,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
+
+app.use('/movies', router);
+app.use('/', router);
+
 //POST requests (Create):
 
 router.post('/movies', (req, res) => {
-    const nome = req.body.nome.substring(0, 200);
-    const descricao = req.body.descricao.substring(0, 400);
-    const urlCapa = req.body.urlcapa.substring(0, 250);
+    const name = req.body.movieName.substring(0, 200);
+    const description = req.body.movieDescription.substring(0, 400);
+    const urlCover = req.body.movieUrlCover.substring(0, 250);
 
-    executeDBQuery(`insert into movies(nome, descricao, url_capa) values('${nome}', '${descricao}', '${urlCapa}')`, res);
+    executeDBQuery(`insert into movies(name, description, url_cover) values('${name}', '${description}', '${urlCover}')`, res);
 });
 
 //GET requests (Read):
 
 router.get('/movies/:id?', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
     let filter = '';
     if (req.params.id) filter = ' where id=' + parseInt(req.params.id);
     executeDBQuery('select * from movies' + filter, res);
@@ -32,9 +41,8 @@ router.get('/movies/:id?', (req, res) => {
 
 router.patch('/movies/:id?', (req, res) => {
     const id = parseInt(req.params.id);
-    const descricao = req.body.descricao.substring(0, 400);
-
-    executeDBQuery(`update movies set descricao='${descricao}' where id=${id}`, res);
+    const description = req.body.movieDescription.substring(0, 400);
+    executeDBQuery(`update movies set description='${description}' where id=${id}`, res);
 });
 
 //DELETE requests (Delete):
@@ -68,3 +76,19 @@ function executeDBQuery(query, res) {
         console.log('Query executed!');
     });
 }
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+  
+    if (isNaN(port)) {
+      // named pipe
+      return val;
+    }
+  
+    if (port >= 0) {
+      // port number
+      return port;
+    }
+  
+    return false;
+  }

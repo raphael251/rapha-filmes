@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rapha Movies</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Rapha Movies</a></h1>
+    </header>
+    <main class="movie-container">
+        <h1 class="title">Adicionar Novo Filme</h1>
+
+        <form action="https://api-rapha-filmes.herokuapp.com/movies" method="POST">
+            <div class="form-group">
+                <label for="movieName">Nome:</label><br />
+                <input type="text" name="movieName" id="movieName">
+            </div>
+
+            <div class="form-group">
+                <label for="movieDescription">Descrição:</label><br />
+                <textarea type="text" name="movieDescription" id="movieDescription"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="movieUrlCover">Url da Capa:</label><br />
+                <input type="text" name="movieUrlCover" id="movieUrlCover">
+            </div>    
+
+            <input type="submit" value="Adicionar">
+            <!--<a href="#" class="btn-create" id="btn-adicionar">Adicionar</a>-->
+        </form>
+    </main>
+
+    <script>
+        /*
+            let btnAdicionar = document.getElementById('btn-adicionar');
+
+            let movieName = document.getElementById('movieName').value;
+            let movieDescription = document.getElementById('movieDescription');
+            let movieUrlCover = document.getElementById('movieUrlCover');
+    
+            function createRequest() {
+                fetch(`https://api-rapha-filmes.herokuapp.com/movies`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: {
+                        "movieName": movieName.value,
+                        "movieDescription": movieDescription.value,
+                        "movieUrlCover": movieUrlCover.value
+                    }
+                })
+                    .then(res => res.text())
+                    .then(res => {
+                        alert('Filme adicionado com sucesso!');
+                        window.location.href = "/";
+                    });
+            }
+    
+            btnAdicionar.addEventListener('click', createRequest);
+            */
+        </script>
+</body>
+</html>

@@ -1,21 +1,18 @@
 O processo seletivo é feito da seguinte forma:
 
+1 - Entrega do teste solicitado
 
+2 - Analise interna do teste
 
-Entrega do teste solicitado
+3 - É informado o resultado para o canditado dos pontos fortes e fracos do teste recebido
 
-Analise interna do teste
+4 - Em caso positivo, conversa presencial no escriório da empresa
 
-É informado o resultado para o canditado dos pontos fortes e fracos do teste recebido
-
-Em caso positivo, conversa presencial no escriório da empresa
-
-Alinhamento da contratação
+5 - Alinhamento da contratação
 
 
 
 Segue abaixo o teste de desenvolvimento:
-
 
 
 Desenvolver na sua linguagem de preferencia um CRUD (Um sistema ou tela, onde é possivel Cadastrar, Editar, Visualizar e Deletar registros)

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rapha Movies</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Rapha Movies</a></h1>
+    </header>
+    <main class="movie-container">
+        <h1 class="title">Atualizar Descrição do Filme</h1>
+
+        <form>
+            <input type="hidden" name="movieId" id="movieId" value="<%= movie.id %>">
+            
+            <div class="form-group">
+                <label for="movieName">Nome:</label><br />
+                <input type="text" name="movieName" id="movieName" value="<%= movie.name %>" disabled><br />
+            </div>
+
+            <div class="form-group">
+                <label for="movieDescription">Descrição:</label><br />
+                <textarea type="text" name="movieDescription" id="movieDescription" ><%= movie.description %></textarea><br />
+            </div>
+
+            <div class="form-group">
+                <label for="movieUrlCover">Url da Capa:</label><br />
+                <input type="text" name="movieUrlCover" id="movieUrlCover" value="<%= movie.url_cover %>"  disabled><br />
+            </div>
+
+            <div class="update-buttons">
+                <a href="#" class="update-movie" id="btn-atualizar">Atualizar</a>
+                <a href="/" class="btn-back">Voltar</a>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        let btnAtualizar = document.getElementById('btn-atualizar');
+        let movieId = document.getElementById('movieId').value;
+        let movieDescription = document.getElementById('movieDescription');
+
+        function updateRequest() {
+            fetch(`https://api-rapha-filmes.herokuapp.com/movies/${movieId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({movieDescription: movieDescription.value})
+            })
+                .then(res => res.text())
+                .then(res => {
+                    alert('Descrição alterada com sucesso!');
+                    window.location.href = "/";
+                });
+        }
+
+        btnAtualizar.addEventListener('click', updateRequest);
+    </script>
+</body>
+</html>

@@ -1,14 +1,17 @@
 {
-  "name": "rapha-filmes-website",
-  "version": "1.0.0",
-  "description": "site do catalogo rapha filmes",
-  "main": "server.js",
+  "name": "website",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "Raphael Passos",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "request": "^2.88.0"
   }
 }
