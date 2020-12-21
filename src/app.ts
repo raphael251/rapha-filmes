@@ -1,8 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-const routes = require('./resource/routes/index');
+import express from 'express';
+import cors from 'cors';
+import { mainRouter } from './resource/routes/index';
 
 class App {
+    server: express.Application
     constructor() {
         this.server = express();
         this.initMiddlewares();
@@ -16,7 +17,7 @@ class App {
     }
 
     initRoutes() {
-        this.server.use(routes);
+        this.server.use(mainRouter);
     }
 }
 
