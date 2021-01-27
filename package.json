@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "serve:dev": "ts-node-dev --inspect --ignore-watch node_modules --transpile-only src/server.ts"
+    "serve:dev": "ts-node-dev --inspect --ignore-watch node_modules --transpile-only src/infra/server.ts"
   },
   "keywords": [
     "filmes",
