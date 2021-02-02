@@ -1,7 +1,7 @@
 import { MoviesRepository } from '../repositories/MoviesRepository';
 import { Movie } from '../entities/Movie';
 
-export class AddMovie {
+export class AddMovieUseCase {
   constructor(private moviesRepository: MoviesRepository) {}
   handle(name: string, description: string, urlCover: string): Promise<Movie> {
     const movieToBeCreated: Movie = { name, description, urlCover }
